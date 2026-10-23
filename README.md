@@ -3,4 +3,4 @@ A collection of lightweight, privacy-first browser extensions built to solve eve
 
 ## PageCopy
 
-[PageCopy](./pagecopy/) copies the currently rendered content of a Notion page as Markdown or clean plain text, locally and on demand.
+[PageCopy](./pagecopy/) copies currently rendered webpage content as Markdown or clean plain text, locally and on demand, with local PDF and text-file import.

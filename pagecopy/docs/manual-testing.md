@@ -20,3 +20,10 @@ For each representative page, copy both formats, paste plain text into a text ed
 ## Popup QA
 
 - Check light and dark system themes, compact dimensions, long error wrapping, keyboard tab order, focus visibility, disabled controls, and status announcements with a screen reader.
+
+## v0.2 outstanding checks
+
+- Main Content, Entire Page, and Links Only on a static article, documentation site, modern app, and Notion page.
+- Native selects, visible custom menu options, open and closed disclosures, images with alt text, nested lists, tables, and code.
+- Direct PDF URL, imported selectable-text PDF, scanned PDF, corrupt PDF, password-protected PDF, and each supported text import type.
+- Confirm the donation button remains hidden for the default empty configuration and opens only an allowlisted configured URL.

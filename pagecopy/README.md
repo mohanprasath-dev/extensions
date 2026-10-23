@@ -1,10 +1,11 @@
 # PageCopy
 
-Copy the page. Keep the structure. PageCopy is a local-first Chrome extension for copying the currently rendered content of a Notion page as Markdown or plain text—without manually selecting its blocks.
+Copy the page. Keep the structure. PageCopy is a local-first Chrome extension for copying currently rendered web content as Markdown or plain text, with local PDF and text-file import.
 
 ## Features
 
-- One-click Markdown and plain-text copy actions
+- Main Content, Entire Page, and Links Only web extraction modes
+- Local PDF, TXT, MD, CSV, JSON, and XML import; PDFs use bundled PDF.js 5.4.296 (Apache-2.0, notice in `vendor/pdfjs/LICENSE`)
 - Structured headings, lists, quotes, code blocks, links, and tables where available in the rendered DOM
 - Local-only extraction, formatting, and clipboard writing
 - Dark-mode, reduced-motion, keyboard, and screen-reader support
@@ -12,7 +13,7 @@ Copy the page. Keep the structure. PageCopy is a local-first Chrome extension fo
 
 ## Supported pages and limitations
 
-PageCopy supports `notion.so`, `*.notion.so`, `notion.site`, and `*.notion.site`. It only accesses the active page after a user clicks the extension. It does not scroll, expand toggles, call Notion APIs, or access cookies. Long virtualized pages and collapsed toggles can therefore be incomplete; the popup warns when it detects likely cases.
+PageCopy supports ordinary HTTP(S) pages, including Notion. It only accesses the active page after a user clicks the extension. It does not scroll, expand controls, call private APIs, or access cookies. Long virtualized pages, closed shadow roots, collapsed disclosures, complex layouts, and scanned PDFs can be incomplete; the popup warns where it can detect that condition. PDF tab retrieval is attempted only for obvious PDF URLs; use Import PDF if it fails.
 
 ## Install and use
 
@@ -42,6 +43,10 @@ The dependency-free tests cover formatter behavior, manifest references, icon di
 - `clipboardWrite`: writes the final text only after collection and formatting succeed.
 
 There are no broad host permissions, network requests, telemetry, persistent page storage, or remote code. Extraction and formatting happen in the browser, and page content is retained only during the copy operation. These are implementation properties, not an independent security audit.
+
+## Donations
+
+Donations are optional. Set a real public `https://buymeacoffee.com/...` page in `src/donation.js`; otherwise the Support PageCopy button is hidden. Create a Buy Me a Coffee creator account, configure payouts there, and copy its public page URL. No payment or supporter data is handled by PageCopy.
 
 ## Architecture
 

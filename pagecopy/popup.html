@@ -5,16 +5,19 @@
   <main class="popup-shell">
     <header class="product-header">
       <img class="brand-icon" src="icons/icon-48.png" alt="">
-      <div><div class="title-row"><h1>PageCopy</h1><span class="site-label">NOTION</span></div><p>Copy Notion content without manual selection.</p></div>
+      <div><div class="title-row"><h1>PageCopy</h1><span class="site-label">WEB + PDF</span></div><p>Copy readable web content without manual selection.</p></div>
     </header>
     <section class="page-status" aria-label="Active page status"><span id="page-status-icon" aria-hidden="true">○</span><span id="page-status-text">Checking active page…</span></section>
+    <label class="mode-label" for="extraction-mode">Extraction mode</label><select id="extraction-mode"><option value="main">Main content</option><option value="entire">Entire page</option><option value="links">Links only</option></select>
     <section class="actions" aria-label="Copy format">
       <button class="copy-action" id="copy-markdown" type="button" disabled><span class="action-icon" aria-hidden="true">⌘</span><span><strong>Copy as Markdown</strong><small>Preserve headings, lists, links and code blocks.</small></span></button>
       <button class="copy-action" id="copy-text" type="button" disabled><span class="action-icon" aria-hidden="true">¶</span><span><strong>Copy as Plain Text</strong><small>Get clean text that is easy to paste anywhere.</small></span></button>
     </section>
+    <button class="import-action" id="import-file" type="button">Import PDF or text file</button><input id="file-picker" type="file" accept=".pdf,.txt,.md,.csv,.json,.xml,application/pdf,text/plain,text/markdown,text/csv,application/json,application/xml" hidden>
+    <button class="support-action" id="support-pagecopy" type="button" hidden>Support PageCopy</button>
     <p id="operation-status" class="operation-status" role="status" aria-live="polite">Ready when you are.</p>
     <footer><span aria-hidden="true">⌁</span><div>Processed locally. Your page content is not uploaded.<br><span>Only content available in the rendered page can be copied.</span></div></footer>
   </main>
-  <script type="module" src="popup.js"></script>
+  <script type="module" src="popup-v2.js"></script>
 </body>
 </html>
