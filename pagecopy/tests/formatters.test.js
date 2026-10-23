@@ -1,0 +1,10 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { toMarkdown, toPlainText } from "../src/formatters.js";
+const page = { title:"Research ✓", blocks:[{type:"heading",level:2,text:"Intro"},{type:"paragraph",text:"Hello [world]"},{type:"bulletList",items:[{text:"First",depth:0},{text:"Nested",depth:1}]},{type:"numberedList",items:[{text:"One",number:1}]},{type:"quote",text:"Quoted\nline"},{type:"callout",label:"Tip",text:"Keep this"},{type:"code",language:"js",text:"const x = `ok`;"},{type:"table",rows:[["A|B",""],["é","2"]]},{type:"unsupported",text:"Fallback"}] };
+test("empty inputs produce empty output",()=>assert.equal(toPlainText({blocks:[]}),""));
+test("plain text includes title, hierarchy, spacing, unicode and fallbacks",()=>{const output=toPlainText(page); assert.match(output,/Research ✓/);assert.match(output,/## Intro/);assert.match(output,/  - Nested/);assert.match(output,/é\t2/);assert.match(output,/Fallback/);assert.ok(!output.includes("<"));});
+test("markdown handles primary block structures",()=>{const output=toMarkdown(page);assert.match(output,/^# Research ✓/);assert.match(output,/## Intro/);assert.match(output,/- First\n  - Nested/);assert.match(output,/1\. One/);assert.match(output,/> Quoted/);assert.match(output,/> \*\*Tip:\*\*/);assert.match(output,/```js/);assert.match(output,/A\\\|B/);});
+test("does not duplicate title when first block is the title heading",()=>assert.equal(toMarkdown({title:"Same",blocks:[{type:"heading",level:1,text:"Same"}]}),"# Same"));
+test("links, missing fields, empty cells and divider are resilient",()=>{const output=toMarkdown({blocks:[{type:"bulletList",items:[{text:"Docs",href:"https://example.com/a(b)"}]},{type:"table",rows:[["",null]]},{type:"divider"},{type:"code",text:"````"}]});assert.match(output,/\[Docs\]\(https:\/\/example.com\/a\\\(b\\\)\)/);assert.match(output,/\|  \|  \|/);assert.match(output,/---/);assert.match(output,/`````/);});
+test("paragraph newlines remain readable",()=>assert.equal(toPlainText({blocks:[{type:"paragraph",text:"one\n\ntwo"}]}),"one\n\ntwo"));
